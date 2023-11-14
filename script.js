@@ -6,11 +6,12 @@ document.querySelectorAll('.bill-type-btn').forEach(btn => btn.addEventListener(
     let specialInstructionsText = document.getElementById('cartSpecialInstructions');
     if(btn.getAttribute('value') == "branch"){
       codes.style = "display: flex;";
-      checkoutBtn.setAttribute('disabled', true);
+      specialInstructionsText.value = "";
+      enabledCheckout(false);
     }else if(btn.getAttribute('value') == "creditDebit"){
       codes.style = "display: none;";
       specialInstructionsText.value = "";
-      checkoutBtn.removeAttribute('disabled');
+      enabledCheckout(true);
     }
 })) 
 
@@ -24,15 +25,13 @@ function getFormData(){
 
     for(let r = 0; r < rows.length; r++){
         let string = "";
-        let starting = r;
-        let ending = 7 * (r + 1);
         // get codes per b
-        for(let b = starting; b < ending; b ++){
-            if(code[b].getAttribute('code-index') == r){
-                let tmp = code[b].value + '-';
+        code.forEach(c =>{
+            if(c.getAttribute('code-index') == r){
+                let tmp = c.value + '-';
                 string += tmp;
             }
-        }
+        })
 
         arr.push(string);
         //get amounts per r
@@ -73,6 +72,7 @@ function printData(){
         }
 
         console.log(string);
+        document.getElementById('cartSpecialInstructions').innerHTML = string;
     }
 
     acknowledgePaymentMethod('show');
@@ -88,7 +88,6 @@ function validateData(){
     var isValid = true;
     arr = [];
     numbersArr = [];
-    subTotal = 13;
 
     codes.forEach(code =>{
         if(code.value === "" || code.value === "null" || code.value === null || code.value === undefined){
@@ -185,22 +184,23 @@ function showHideRow(show, num){
 
 function acknowledgePaymentMethod(method){
     let checkoutBtn = document.getElementById('checkout-btn');
-    let acknowledgement = document.getElementById('');
+    let acknowledgement = document.getElementById('user-instruction');
 
     switch(method){
         case "show":
             acknowledgement.style = "display: flex";
             break;
-    }
-
-    if(checkoutBtn.hasAttribute('disabled')){
+        case "confirm":
+            acknowledgement.style = "display: none";
+            enabledCheckout(true);
+            break;
 
     }
 }
 
 function enabledCheckout(enabled){
     let checkoutBtn = document.getElementById('checkout-btn');
-    if(enabled){
+    if(!enabled){
         checkoutBtn.setAttribute('disabled', true);
         return false;
     }else{
