@@ -190,6 +190,7 @@ function formError(input, valid, errorCode){
 
 
 function showHideRow(show, num){
+    enabledCheckout(false);
     if(show){
         document.getElementById('allocation-' + num).classList.replace('inactive-allocation', 'active-allocation');
     }else {
