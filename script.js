@@ -83,7 +83,8 @@ function printData(){
         }
 
         console.log(string);
-        document.getElementById('cartSpecialInstructions').innerHTML = string;
+        document.getElementById('cartSpecialInstructions').value = string;
+        document.getElementById('cartSpecialInstructions').textContent = string;
 
     }
 
