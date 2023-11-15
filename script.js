@@ -1,3 +1,15 @@
+window.addEventListener('load', applyCodesToInputs);
+
+var cCompany = ["BCS", "BCSC", "BCSF", "BCSG", "BCSP"];
+var cFunds = ["10", "11", "12", "19", "20", "30", "31","32","40", "50", "60", "61", "70", "80", "90", "99", "FF", "UU", "ZZ"];
+var cOrganization = ["001", "002"];
+var cBranch = ["13", "21"];
+var cProgram = ["222", "333"];
+var cAccount = ["100", "101"];
+var cProject = ["99", "33"];
+var arr = [];
+var numbersArr = [];
+
 //radio buttons
 document.querySelectorAll('.bill-type-btn').forEach(btn => btn.addEventListener('click', ()=>{
     var codes = document.getElementById('finance-codes');
@@ -15,19 +27,42 @@ document.querySelectorAll('.bill-type-btn').forEach(btn => btn.addEventListener(
     }
 })) 
 
+function applyCodesToInputs(){
+    var select = document.querySelectorAll('select');
+    select.forEach(sel =>{
 
-var cCompany = ["--", "BCS", "BCSC", "BCSF", "BCSG", "BCSP"];
-var cFunds = ["10", "11", "12", "19", "20", "30", "31","32","40", "50", "60", "61", "70", "80", "90", "99", "FF", "UU", "ZZ"];
-var cOrganization = [""];
-var cBranch = [""];
-var cProgram = [""];
-var cAccount = [""];
-var cProject = [""];
+        switch(sel.getAttribute('name')){
+            case "company":
+                setSelectOptions(cCompany, sel);
+            break;
+            case "fund":
+                setSelectOptions(cFunds, sel);
+            break;
+            case "organization":
+                setSelectOptions(cOrganization, sel);
+            break;
+            case "branch":
+                setSelectOptions(cBranch, sel);
+            break;
+            case "program":
+                setSelectOptions(cProgram, sel);
+            break;
+            case "account":
+                setSelectOptions(cAccount, sel);
+            break;
+            case "project":
+                setSelectOptions(cProject, sel);
+            break;
+        }
+    })
+}
 
-
-
-var arr = [];
-var numbersArr = [];
+function setSelectOptions(arr, element){
+    arr.forEach(itemInLoop =>{
+        let codes = "<option label=" + itemInLoop + " value=" + itemInLoop + ">" + itemInLoop + "</option>";
+        element.insertAdjacentHTML('beforeend', codes);
+    })
+}
 
 function getFormData(){
     var rows = document.querySelectorAll('.active-allocation');
