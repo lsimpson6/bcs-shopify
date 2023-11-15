@@ -1,19 +1,30 @@
 //radio buttons
 document.querySelectorAll('.bill-type-btn').forEach(btn => btn.addEventListener('click', ()=>{
     var codes = document.getElementById('finance-codes');
-    let text = document.getElementById('finance-codes-amount');
-    let checkoutBtn = document.getElementById('checkout-btn');
     let specialInstructionsText = document.getElementById('cartSpecialInstructions');
     if(btn.getAttribute('value') == "branch"){
       codes.style = "display: flex;";
       specialInstructionsText.value = "";
+      specialInstructionsText.setAttribute('readonly', true);
       enabledCheckout(false);
     }else if(btn.getAttribute('value') == "creditDebit"){
       codes.style = "display: none;";
       specialInstructionsText.value = "";
+      specialInstructionsText.removeAttribute('readonly');
       enabledCheckout(true);
     }
 })) 
+
+
+var cCompany = ["--", "BCS", "BCSC", "BCSF", "BCSG", "BCSP"];
+var cFunds = ["10", "11", "12", "19", "20", "30", "31","32","40", "50", "60", "61", "70", "80", "90", "99", "FF", "UU", "ZZ"];
+var cOrganization = [""];
+var cBranch = [""];
+var cProgram = [""];
+var cAccount = [""];
+var cProject = [""];
+
+
 
 var arr = [];
 var numbersArr = [];
@@ -73,6 +84,7 @@ function printData(){
 
         console.log(string);
         document.getElementById('cartSpecialInstructions').innerHTML = string;
+
     }
 
     acknowledgePaymentMethod('show');
@@ -88,6 +100,8 @@ function validateData(){
     var isValid = true;
     arr = [];
     numbersArr = [];
+    //subTotal = 13;
+    let sumText = document.getElementById('sum-of-values');
 
     codes.forEach(code =>{
         if(code.value === "" || code.value === "null" || code.value === null || code.value === undefined){
@@ -118,6 +132,8 @@ function validateData(){
         })
         isValid = false;
     }
+
+    sumText.textContent = "Total: $" + totalAmount;
 
     if(isValid){
         getFormData();
