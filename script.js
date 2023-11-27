@@ -25,35 +25,35 @@ function applyCodesToInputs(){
 
         switch(sel.getAttribute('name')){
             case "company":
-                setSelectOptions(cCompany, sel);
+                setSelectOptions(cCompany, "noNameArray", sel);
             break;
             case "fund":
-                setSelectOptions(cFunds, sel);
-            break;
-            case "organization":
-                setSelectOptions(cOrganization, sel);
+                setSelectOptions(cFunds, "noNameArray", sel);
             break;
             case "branch":
-                setSelectOptions(cBranch, sel);
+                setSelectOptions(cOrganizationBranchCode,cOrganizationBranchName, sel);
             break;
             case "program":
-                setSelectOptions(cProgram, sel);
-            break;
-            case "account":
-                setSelectOptions(cAccount, sel);
-            break;
-            case "project":
-                setSelectOptions(cProject, sel);
+                setSelectOptions(cProgramCode, cProgramName, sel);
             break;
         }
     })
 }
 
-function setSelectOptions(arr, element){
-    arr.forEach(itemInLoop =>{
-        let codes = "<option label=" + itemInLoop + " value=" + itemInLoop + ">" + itemInLoop + "</option>";
-        element.insertAdjacentHTML('beforeend', codes);
-    })
+function setSelectOptions(codes, names, element){
+
+    for(let i = 0; i < codes.length; i++){
+
+        var tmpCode = codes[i];
+        var tmpName = names[i];
+        if(names != "noNameArray" && tmpName!= undefined){
+            var code = "<option label='" + tmpName + "' value=" +tmpCode + ">" +tmpCode + "</option>";
+        }else {
+            code = "<option label='" + tmpCode + "' value=" + tmpCode + ">" + tmpCode + "</option>";
+
+        }
+        element.insertAdjacentHTML('beforeend', code);
+    }
 }
 
 function getFormData(){
