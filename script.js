@@ -1,12 +1,4 @@
 window.addEventListener('load', applyCodesToInputs);
-
-var cCompany = ["BCS", "BCSC", "BCSF", "BCSG", "BCSP"];
-var cFunds = ["10", "11", "12", "19", "20", "30", "31","32","40", "50", "60", "61", "70", "80", "90", "99", "FF", "UU", "ZZ"];
-var cOrganization = ["001", "002"];
-var cBranch = ["13", "21"];
-var cProgram = ["222", "333"];
-var cAccount = ["100", "101"];
-var cProject = ["99", "33"];
 var arr = [];
 var numbersArr = [];
 
