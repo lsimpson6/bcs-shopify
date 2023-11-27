@@ -218,11 +218,16 @@ function formError(input, valid, errorCode){
 
 
 function showHideRow(show, num){
+    var rows = document.querySelectorAll('.active-allocation');
     enabledCheckout(false);
     if(show){
         document.getElementById('allocation-' + num).classList.replace('inactive-allocation', 'active-allocation');
     }else {
-        document.getElementById('allocation-' + num).classList.replace('active-allocation', 'inactive-allocation');
+        if(rows.length > 2 && num == 2){
+            document.getElementById('allocation-3').classList.replace('active-allocation', 'inactive-allocation');
+        }else {
+            document.getElementById('allocation-' + num).classList.replace('active-allocation', 'inactive-allocation');
+        }
     }
 }
 
