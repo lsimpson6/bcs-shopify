@@ -47,10 +47,9 @@ function setSelectOptions(codes, names, element){
         var tmpCode = codes[i];
         var tmpName = names[i];
         if(names != "noNameArray" && tmpName!= undefined){
-            var code = "<option label='" + tmpName + "' value=" +tmpCode + ">" +tmpCode + "</option>";
+            var code = "<option label='" + tmpName + "( " + tmpCode + " )" + "' value=" +tmpCode + ">" +tmpCode + "</option>";
         }else {
             code = "<option label='" + tmpCode + "' value=" + tmpCode + ">" + tmpCode + "</option>";
-
         }
         element.insertAdjacentHTML('beforeend', code);
     }
