@@ -25,33 +25,34 @@ function applyCodesToInputs(){
 
         switch(sel.getAttribute('name')){
             case "company":
-                setSelectOptions(cCompany, "noNameArray", sel);
+                setSelectOptions(cCompany, true, sel);
             break;
             case "fund":
-                setSelectOptions(cFunds, "noNameArray", sel);
+                setSelectOptions(cFunds, true, sel);
             break;
             case "branch":
-                setSelectOptions(cOrganizationBranchCode,cOrganizationBranchName, sel);
+                setSelectOptions(objBranches, false, sel);
             break;
             case "program":
-                setSelectOptions(cProgramCode, cProgramName, sel);
+                setSelectOptions(objPrograms, false, sel);
             break;
         }
     })
 }
 
-function setSelectOptions(codes, names, element){
-
-    for(let i = 0; i < codes.length; i++){
-
-        var tmpCode = codes[i];
-        var tmpName = names[i];
-        if(names != "noNameArray" && tmpName!= undefined){
-            var code = "<option label='" + tmpName + "( " + tmpCode + " )" + "' value=" +tmpCode + ">" +tmpCode + "</option>";
-        }else {
-            code = "<option label='" + tmpCode + "' value=" + tmpCode + ">" + tmpCode + "</option>";
+function setSelectOptions(codes, isArr, element){
+    if(isArr){
+        codes.forEach(c =>{
+            let arrCodeString = "<option label='" + c + "' value=" + c + ">" + c + "</option>";
+            element.insertAdjacentHTML('beforeend', arrCodeString);
+        })
+    }else {
+        for(let ci = 1; ci <= Object.keys(codes).length; ci++){
+            var tmpCode = codes[ci].code;
+            var tmpName = codes[ci].name;
+            var objCodeString = "<option label='" + tmpName + " ( " + tmpCode + " )" + "' value=" + tmpCode + ">" + tmpCode + "</option>";
+            element.insertAdjacentHTML('beforeend', objCodeString);
         }
-        element.insertAdjacentHTML('beforeend', code);
     }
 }
 
