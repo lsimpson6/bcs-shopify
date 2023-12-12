@@ -105,7 +105,7 @@ function printData(){
         // for prod, set to text content of textarea
         let string = "";
         for(let i = 0; i < arr.length; i++){
-            let tmp = 'Allocate $' + numbersArr[i] + ' to ' + arr[i].slice(0, arr[i].indexOf(arr[i].length - 1)) + ". " + '\n';
+            let tmp = 'Allocate $' + numbersArr[i] + ' to ' + arr[i].slice(0, arr[i].indexOf(arr[i].length - 1)) + '\n';
             string += tmp;
         }
 
